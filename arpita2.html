@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystical Guardian</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif; /* Royal, elegant font */
+            background-color: #F5F5DC; /* Beige */
+            color: #8B4513; /* Brown */
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #F5F5DC;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 3s ease-in-out forwards;
+        }
+        .logo-animation {
+            width: 200px;
+            height: 200px; /* Set to square for circular shape */
+            border-radius: 50%; /* Make it circular */
+            animation: fadeScaleIn 1s ease-in-out;
+            transform-origin: center; /* Ensure scaling from center */
+        }
+        .name-animation {
+            font-size: 48px;
+            font-weight: bold;
+            color: #FFD700; /* Gold for old money feel */
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out 1s forwards;
+        }
+        @keyframes fadeScaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #8B4513; /* Brown */
+            color: #F5F5DC; /* Beige */
+        }
+        .logo {
+            width: 200px;
+            height: 200px; /* Set to square for circular shape */
+            border-radius: 50%; /* Make it circular */
+            margin-bottom: 20px;
+        }
+        .about {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #F5F5DC;
+        }
+        .timings {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #8B4513;
+            color: #F5F5DC;
+        }
+        .services {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+            background-color: #F5F5DC;
+        }
+        .service {
+            background-color: #FFFFFF;
+            color: #8B4513;
+            border: 2px solid #FFD700; /* Gold border */
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .service:hover {
+            transform: scale(1.05);
+        }
+        .service img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+        .modal.show {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+        .modal-content {
+            background-color: #F5F5DC;
+            color: #8B4513;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            position: relative;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: #000;
+        }
+        .why-choose {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #8B4513;
+            color: #F5F5DC;
+        }
+        .contact {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #F5F5DC;
+        }
+        .booking {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #FFFFFF;
+            color: #8B4513;
+        }
+        .feedback {
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #8B4513;
+            color: #F5F5DC;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        input, select, textarea, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #FFD700;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #FFD700;
+            color: #8B4513;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #8B4513;
+            color: #FFD700;
+        }
+        .whatsapp-btn {
+            display: inline-block;
+            background-color: #25D366;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+        .youtube-link {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div>
+            <img src="https://i.ibb.co/FLthn2Dg/logo-png.png" alt="Mystical Guardian Logo" class="logo-animation">
+            <div class="name-animation">Mystical Guardian</div>
+        </div>
+    </div>
+
+    <header>
+        <img src="https://i.ibb.co/FLthn2Dg/logo-png.png" alt="Mystical Guardian Logo" class="logo">
+    </header>
+
+    <section class="about">
+        <h2>About Mystical Guardian</h2>
+        <p>Embark on a journey of enlightenment and harmony with Mystical Guardian, where ancient wisdom converges with modern intuition. Our sanctuary offers profound insights through mystical arts, guiding you towards balance, clarity, and spiritual fulfillment. Discover the transformative power of esoteric knowledge tailored to your unique path.</p>
+    </section>
+
+    <section class="timings">
+        <h3>Service Timings</h3>
+        <p>Available from <strong>10 AM to 9 PM</strong>, ensuring your mystical needs are met at your convenience.</p>
+        <blockquote>"The stars align when you seek wisdom at the right time."</blockquote>
+    </section>
+
+    <section class="services">
+        <div class="service" onclick="openModal('tarot')">
+            <img src="https://i.ibb.co/Pv0SyKSC/tarot-png.png" alt="Tarot Reading">
+            <h3>Tarot Reading</h3>
+            <ul>
+                <li>Personalized insights into your life's mysteries</li>
+                <li>Expert interpretation of ancient symbols</li>
+                <li>Guidance for decision-making and self-discovery</li>
+                <li>Confidential and empowering sessions</li>
+            </ul>
+        </div>
+        <div class="service" onclick="openModal('vastu')">
+            <img src="https://i.ibb.co/XrV2XQ20/vastu-png.png" alt="Vastu Consultancy">
+            <h3>Vastu Consultancy</h3>
+            <ul>
+                <li>Harmonize your space with cosmic energies</li>
+                <li>Customized solutions for homes and offices</li>
+                <li>Enhance prosperity, health, and relationships</li>
+                <li>Based on traditional Vastu Shastra principles</li>
+            </ul>
+        </div>
+        <div class="service" onclick="openModal('healing')">
+            <img src="https://i.ibb.co/nM5C9kh3/healing-png.png" alt="Healing">
+            <h3>Healing</h3>
+            <ul>
+                <li>Holistic restoration of mind, body, and spirit</li>
+                <li>Energy balancing and chakra alignment</li>
+                <li>Relief from stress, ailments, and emotional blocks</li>
+                <li>Personalized healing modalities for optimal well-being</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Modals for services -->
+    <div id="tarot-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('tarot')">&times;</span>
+            <h3>Tarot Reading</h3>
+            <p>Dive deep into the arcane with our Tarot Reading service, where each card unveils layers of your destiny. Gain clarity on love, career, and personal growth through intuitive guidance.</p>
+            <!-- Leave space for package price, details -->
+            <p><strong>Packages:</strong> [PRICE: 2100 FOR 1 HOUR SESSION .]</p>
+        </div>
+    </div>
+    <div id="vastu-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('vastu')">&times;</span>
+            <h3>Vastu Consultancy</h3>
+            <p>Transform your environment with Vastu Consultancy, aligning your space to attract positive energies. From layout adjustments to elemental balances, achieve harmony in your surroundings.</p>
+            <!-- Leave space for package price, details -->
+            <p><strong>Packages:</strong> [5100-51000]</p>
+        </div>
+    </div>
+    <div id="healing-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('healing')">&times;</span>
+            <h3>Healing</h3>
+            <p>Experience profound Healing sessions that rejuvenate your essence. Through energy work and therapeutic techniques, release blockages and embrace vitality.</p>
+            <!-- Leave space for package price, details -->
+            <p><strong>Packages:</strong> [11000-51000]</p>
+        </div>
+    </div>
+
+    <section class="why-choose">
+        <h2>Why Choose Mystical Guardian?</h2>
+        <ul style="list-style: none; padding: 0;">
+            <li>Decades of expertise in mystical arts and spiritual guidance</li>
+            <li>Personalized consultations tailored to individual needs</li>
+            <li>Ethical practices ensuring confidentiality and respect</li>
+            <li>Proven results in enhancing life balance and prosperity</li>
+            <li>Accessible and flexible booking options for your convenience</li>
+            <li>Integration of ancient wisdom with modern insights</li>
+            <li>Luxurious, serene ambiance for transformative experiences</li>
+            <li>Community of satisfied clients sharing positive testimonials</li>
+        </ul>
+    </section>
+
+    <section class="contact">
+        <h2>Contact Us</h2>
+        <p><strong>Owner:</strong> Arpita Jain</p>
+        <p><strong>Phone:</strong> <a href="tel:918103039889" style="color: #8B4513;">91 8103039889</a></p>
+        <p><strong>Email:</strong> <a href="mailto:mysticalguardia23@gmail.com" style="color: #8B4513;">mysticalguardia23@gmail.com</a></p>
+        <p><strong>Instagram:</strong> <a href="https://www.instagram.com/mystical_guardian_1008/" style="color: #8B4513;">www.instagram.com/mystical_guardian_1008/</a></p>
+        <a href="https://wa.me/918103039889?text=Hello.%20I%20want%20to%20know%20more%20about%20services" class="whatsapp-btn">Book via WhatsApp</a>
+        <div class="youtube-link">
+            <p><strong>YouTube:</strong> <a href="https://youtube.com/@mysticaltarot24?si=bvWPlyH4BsZKaV4S" style="color: #8B4513;">https://youtube.com/@mysticaltarot24?si=bvWPlyH4BsZKaV4S</a></p>
+        </div>
+    </section>
+
+    <section class="booking">
+        <h2>Book a Slot</h2>
+        <form onsubmit="submitBooking(event)">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="tel" id="phone" placeholder="Your Phone Number" required>
+            <select id="service" required>
+                <option value="">Select Service</option>
+                <option value="Tarot Reading">Tarot Reading</option>
+                <option value="Vastu Consultancy">Vastu Consultancy</option>
+                <option value="Healing">Healing</option>
+            </select>
+            <input type="date" id="date" required> <!-- Calendar integration -->
+            <input type="time" id="time" min="10:00" max="21:00" required> <!-- Custom time picker, restricted to 10 AM - 9 PM -->
+            <button type="submit">Book Slot</button>
+        </form>
+    </section>
+
+    <section class="feedback">
+        <h2>Share Your Experience</h2>
+        <form onsubmit="submitFeedback(event)">
+            <input type="text" id="feedback-name" placeholder="Your Name" required>
+            <input type="email" id="feedback-email" placeholder="Your Email (optional)">
+            <textarea id="feedback-message" placeholder="Tell us about your experience..." rows="5" required></textarea>
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </section>
+
+    <script>
+        // Hide loading after animation
+        setTimeout(() => {
+            document.getElementById('loading').style.display = 'none';
+        }, 3000);
+
+        function openModal(service) {
+            const modal = document.getElementById(service + '-modal');
+            modal.classList.add('show');
+        }
+        function closeModal(service) {
+            const modal = document.getElementById(service + '-modal');
+            modal.classList.remove('show');
+        }
+        function submitBooking(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const message = `Booking Request: Name: ${name}, Phone: ${phone}, Service: ${service}, Date: ${date}, Time: ${time}`;
+            const whatsappUrl = `https://wa.me/918103039889?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+        function submitFeedback(event) {
+            event.preventDefault();
+            const name = document.getElementById('feedback-name').value;
+            const email = document.getElementById('feedback-email').value;
+            const message = document.getElementById('feedback-message').value;
+            const feedbackMessage = `Feedback from ${name} (${email}): ${message}`;
+            const whatsappUrl = `https://wa.me/918103039889?text=${encodeURIComponent(feedbackMessage)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
